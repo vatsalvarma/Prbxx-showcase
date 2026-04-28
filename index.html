@@ -272,6 +272,96 @@
         .widget-info h4 { font-family: var(--font-sub); font-size: 0.9rem; font-weight: 600; margin-bottom: 5px; }
         .widget-info p { font-size: 0.65rem; color: var(--text-muted); line-height: 1.4; }
         .widget-info span { color: #fff; font-weight: 600; }
+        
+         /* ========================
+           SNAKE DECK SCROLL SECTION
+           ======================== */
+        .snake-scene {
+            position: relative;
+            width: 100vw;
+            height: 400vh; /* Extremely tall to allow pinning for long scrubbing */
+            background: #000;
+        }
+
+        .snake-pin {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            background: #000;
+        }
+
+        /* Nav logic at the top of the dark section */
+        .sk-nav { position: absolute; top: 40px; left: 40px; right: 40px; display: flex; justify-content: space-between; z-index: 30; }
+        .sk-logo { font-size: 1.5rem; }
+        .sk-tabs { display: flex; gap: 20px; background: rgba(255,255,255,0.1); padding: 5px 20px; border-radius: 30px;}
+        .sk-tabs a { color: #fff; text-decoration: none; font-size: 0.8rem; }
+
+        /* Phase 1: Zoom In UI */
+        .snake-zoom-ui {
+            position: absolute;
+            width: 100%; height: 100%;
+            display: flex; justify-content: center; align-items: center;
+            z-index: 5;
+        }
+
+        /* Abstract geometrical shapes (Like 'OUT' in user image) */
+        .zoom-geo {
+            position: absolute;
+            border: 40px solid #fff;
+            opacity: 0.9;
+        }
+        .zoom-o { width: 300px; height: 300px; border-radius: 50px; left: 20%; transform: rotate(45deg); }
+        .zoom-u { width: 300px; height: 300px; border-bottom-left-radius: 100px; border-bottom-right-radius: 100px; border-top: none; left: 50%; top: 50%; transform: translate(-50%, -20%); }
+        .zoom-text { position: absolute; bottom: 10%; right: 10%; width: 300px; font-size: 1.5rem; text-align: left; line-height: 1.2; }
+
+        .zm-prod {
+            position: absolute;
+            width: 350px; height: 350px;
+            object-fit: cover;
+            border-radius: 40px;
+            box-shadow: 0 40px 100px rgba(0,0,0,0.9);
+            z-index: 10;
+        }
+
+        /* Phase 2: Massive Faded Background Title */
+        .snake-bg-text {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            font-family: var(--font-head);
+            font-size: 7vw;
+            font-weight: 900;
+            line-height: 1;
+            text-align: center;
+            color: #fff;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        /* Phase 3: Snake Deck Images */
+        .snake-deck {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 20;
+            pointer-events: none; /* Let hover pass through unless directly on card */
+        }
+
+        .snake-card {
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 280px; height: 380px;
+            margin-left: -140px; margin-top: -190px; /* Perfect centering */
+            border-radius: 20px;
+            object-fit: cover;
+            box-shadow: -15px 15px 40px rgba(0,0,0,0.8);
+            pointer-events: auto;
+            border: 4px solid #fff;
+        }
 
 
         /* ========================
@@ -417,8 +507,8 @@
             align-items: center;
         }
         
-        .gallery-nav-logo { font-family: var(--font-head); font-weight: 900; font-size: 1.2rem; color: var(--cyan); display: flex; align-items: center; gap: 10px; }
-        .gallery-nav-links { display: flex; gap: 30px; font-size: 0.8rem; color: var(--text-muted); }
+        .gallery-nav-logo { font-family: var(--font-head); font-weight: 900; font-size: 1.2rem; color: white; display: flex; align-items: center; gap: 10px; }
+        .gallery-nav-links { display: flex; gap: 30px; font-size: 0.8rem; color: white; }
 
         .gallery-container {
             display: flex;
@@ -500,12 +590,12 @@
         .fa-main-avatar {
             width: 60px; height: 60px;
             border-radius: 50%; object-fit: cover;
-            border: 2px solid var(--cyan);
+            border: 2px solid white;
         }
 
         .fa-main-info { display: flex; flex-direction: column; gap: 3px; }
         .fa-main-info h4 { font-size: 0.8rem; font-weight: 700; color: #fff; }
-        .fa-main-info p { font-size: 0.6rem; color: var(--cyan); text-transform: uppercase; letter-spacing: 1px;}
+        .fa-main-info p { font-size: 0.6rem; color: black; text-transform: uppercase; letter-spacing: 1px;}
 
 
         /* Rotating Cyan Rings Avatars */
@@ -536,7 +626,7 @@
 
         .fa-ring circle {
             fill: none;
-            stroke: var(--cyan);
+            stroke: white;
             stroke-width: 2.5;
             stroke-dasharray: 200;
             stroke-dashoffset: 140; /* The gap */
@@ -548,7 +638,319 @@
             100% { transform: rotate(360deg); }
         }
 
-        .fa-name { position: absolute; bottom: -30px; font-size: 0.7rem; color: var(--text-muted); white-space: nowrap; }
+        .fa-name { position: absolute; bottom: -30px; font-size: 0.7rem; color: white; white-space: nowrap; }
+    
+          /* ========================
+           PRESSURD FASHION UI SECTION
+           ======================== */
+        .pressurd-section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #000000 0%, #222222 50%, #444444 100%);
+            overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Massive Watermark / Particles */
+        .pr-watermark {
+            position: absolute;
+            bottom: -5vh;
+            right: -5vw;
+            font-family: var(--font-head);
+            font-size: 40vw;
+            font-weight: 900;
+            line-height: 0.8;
+            color: rgba(255, 255, 255, 0.05);
+            /* very faint */
+            z-index: 0;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+
+        /* Nav Menus */
+        .pr-nav {
+            position: absolute;
+            top: 40px;
+            left: 160px;
+            /* inset past vertical text */
+            display: flex;
+            gap: 30px;
+            z-index: 20;
+        }
+
+        .pr-nav a {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.7);
+            display: inline-block;
+        }
+
+        .pr-nav a:hover {
+            color: #fff;
+        }
+
+        .pr-nav a.active {
+            color: #fff;
+            border-bottom: 2px solid #fff;
+            padding-bottom: 4px;
+        }
+
+        .pr-nav-right {
+            position: absolute;
+            top: 40px;
+            right: 60px;
+            display: flex;
+            gap: 30px;
+            z-index: 20;
+            align-items: center;
+        }
+
+        .pr-nav-right a {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .pr-nav-right svg {
+            width: 20px;
+            height: 20px;
+            stroke: #fff;
+            fill: none;
+        }
+
+        /* Left Side */
+        .pr-left {
+            position: relative;
+            width: 25vw;
+            height: 100%;
+            z-index: 10;
+        }
+
+        .pr-dots {
+            position: absolute;
+            left: 20px;
+            top: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .pr-dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 4px;
+        }
+
+        .pr-dot.active {
+            background: #fff;
+            border-color: #fff;
+        }
+
+        .pr-vert-text {
+            position: absolute;
+            left: 150px;
+            bottom: 50px;
+            font-family: var(--font-head);
+            font-size: 10vw;
+            font-weight: 900;
+            line-height: 0.8;
+            color: #fff;
+            transform-origin: bottom left;
+            transform: rotate(-90deg) translate(-10%, 10%);
+            /* Vertical stack approx */
+            white-space: nowrap;
+            letter-spacing: -2px;
+        }
+
+        .pr-credits {
+            position: absolute;
+            left: 170px;
+            top: 40vh;
+            font-family: 'Inter', sans-serif;
+            /* basic readable font */
+            font-size: 0.75rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pr-credits strong {
+            display: block;
+            font-weight: 800;
+            letter-spacing: 2px;
+            margin-bottom: 10px;
+        }
+
+        .pr-social {
+            position: absolute;
+            left: 170px;
+            bottom: 40px;
+            display: flex;
+            gap: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Center Model Area */
+        .pr-center {
+            position: relative;
+            width: 40vw;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            z-index: 15;
+            perspective: 1500px;
+            /* For 3D Tilt */
+            transform-style: preserve-3d;
+        }
+
+        .pr-model {
+            height: 90vh;
+            /* huge */
+            object-fit: contain;
+            /* Premium cutout image placeholder */
+            content: url('https://images.unsplash.com/photo-1549618174-88aa38bbac70?q=80&w=800&auto=format&fit=crop');
+            /* Transparent PNG would be better here, using clear unsplash subject */
+            filter: drop-shadow(0 40px 60px rgba(0, 0, 0, 0.5));
+            transform: translateZ(50px);
+            /* Lifts off the background */
+            will-change: transform;
+        }
+
+        /* Pagination dots bottom center */
+        .pr-page-dots {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+        }
+
+        .pr-page-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .pr-page-dot.active {
+            background: #fff;
+            transform: scale(1.3);
+        }
+
+        /* Right Side Data */
+        .pr-right {
+            position: relative;
+            width: 35vw;
+            height: 100%;
+            z-index: 10;
+            padding: 25vh 60px 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .pr-info-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .pr-desc-lines h5 {
+            font-size: 0.8rem;
+            font-weight: 400;
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        .pr-desc-lines h5 span {
+            display: block;
+            font-weight: 700;
+            color: #fff;
+            margin-top: 5px;
+        }
+
+        .pr-price {
+            font-family: var(--font-head);
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .pr-buttons {
+            display: flex;
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .pr-btn {
+            height: 60px;
+            font-weight: 600;
+            font-family: var(--font-sub);
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .pr-btn-style {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            color: #fff;
+        }
+
+        .pr-btn-bid {
+            flex: 2;
+            background: rgba(0, 0, 0, 0.25);
+            color: #fff;
+        }
+
+        .pr-btn:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .pr-thumb-row {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .pr-thumb {
+            width: 70px;
+            height: 90px;
+            object-fit: cover;
+            background: #fff;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .pr-next-text {
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-left: 20px;
+            cursor: none;
+        }
+
+        .pr-privacy {
+            position: absolute;
+            bottom: 40px;
+            right: 60px;
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+
+        /* The Custom Magnetic Class logic is handled via JS */
+        .magnetic {
+            display: inline-block;
+            cursor: none;
+        }
 
     </style>
 </head>
@@ -573,7 +975,7 @@
                 <div class="sub-title" id="st-sub">SHOWCASE</div>
                 
                 <p class="description" id="st-desc">
-                    One of the most popular fantasy character <br> you could find on the web!
+                    One of the most popular virtual character <br> you could find on the web!
                 </p>
                 
                 <button class="btn-learn interactive" id="st-btn">LEARN MORE</button>
@@ -610,10 +1012,49 @@
             <div class="glass-widget interactive" id="st-widget">
                 <div class="widget-thumb"></div>
                 <div class="widget-info">
-                    <h4>Jungle Fantasy</h4>
-                    <p>Also view the jungle fantasy about this new... <span>Read More</span></p>
+                    <h4>Virtual Reality</h4>
+                    <p>Also view the jungle book about this new... <span>Read More</span></p>
                 </div>
             </div>
+        </div>
+    </section>
+
+     <!-- NEW: SNAKE DECK SCROLL SECTION -->
+    <section class="snake-scene" id="snake-scene">
+        <div class="snake-pin" id="snake-pin">
+            
+            <div class="sk-nav">
+                <div class="sk-logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><circle cx="12" cy="12" r="10" stroke="#fff" stroke-width="2" fill="none"/></svg></div>
+                <div class="sk-tabs interactive magnetic"><a href="#">VIRTUAL</a> | <a href="#">REALITY</a></div>
+                <div style="font-size:0.8rem; letter-spacing:1px">INFINITY EDITION VR</div>
+            </div>
+
+            <!-- Focus 1: Z-Axis Zoom Graphics -->
+            <div class="snake-zoom-ui">
+                <div class="zoom-geo zoom-o"></div>
+                <div class="zoom-geo zoom-u"></div>
+                <div class="zoom-text">Instantly Generate <br> <strong>Stunning Product Images</strong></div>
+                <!-- Premium Cosmetics placeholder -->
+                <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?q=80&w=600&auto=format&fit=crop" class="zm-prod">
+            </div>
+
+            <!-- Focus 2: The massive background text -->
+            <div class="snake-bg-text">
+                Revolutionizing<br> Product<br>Visualization
+            </div>
+
+            <!-- Focus 3: The deck that unspools -->
+            <div class="snake-deck">
+                <img src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?q=80&w=400&auto=format&fit=crop" class="snake-card interactive">
+                <img src="https://images.unsplash.com/photo-1620916566398-39f1143ab7be?q=80&w=400&auto=format&fit=crop" class="snake-card interactive">
+                <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=400&auto=format&fit=crop" class="snake-card interactive">
+                <img src="https://plus.unsplash.com/premium_photo-1677094310899-02303289cadf?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="snake-card interactive">
+                <img src="https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=400&auto=format&fit=crop" class="snake-card interactive">
+                <img src="https://plus.unsplash.com/premium_photo-1681010317870-44a7ca6f9bee?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="snake-card interactive">
+                <img src="https://images.unsplash.com/photo-1585386959984-a4155224a1ad?q=80&w=400&auto=format&fit=crop" class="snake-card interactive">
+                <img src="https://plus.unsplash.com/premium_photo-1711043989192-a4f64427be0b?q=80&w=784&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="snake-card interactive">
+            </div>
+
         </div>
     </section>
 
@@ -768,6 +1209,102 @@
         </div>
     </section>
 
+     <!-- NEW SECTION: PRESSURD FASHION PARALLAX -->
+    <section class="pressurd-section" id="pressurd-sec">
+        <div class="pr-watermark">ELECTRO</div>
+
+        <!-- Left Nav and Content -->
+        <div class="pr-nav">
+            <a href="#" class="magnetic interactive active">VR</a>
+            <a href="#" class="magnetic interactive">DRONE</a>
+            <a href="#" class="magnetic interactive">Customise</a>
+        </div>
+
+        <div class="pr-left">
+            <div class="pr-dots">
+                <div class="pr-dot"></div>
+                <div class="pr-dot"></div>
+                <div class="pr-dot active"></div>
+                <div class="pr-dot"></div>
+            </div>
+
+            <div class="pr-vert-text">PRESSURD</div>
+
+            <div class="pr-credits">
+                <strong>CREDITS</strong>
+                Agency: @prbxxx <br>
+                AI: @mprbxxx <br>
+                Retouching: @vhere.com <br><br>
+                WeSayHi Production Team:<br>
+                @lohit <br>
+                @vatsal<br>
+                @minniatur
+            </div>
+
+            <div class="pr-social">
+                <a href="#" class="magnetic interactive">IN</a>
+                <a href="#" class="magnetic interactive">TW</a>
+                <a href="#" class="magnetic interactive">YT</a>
+                <a href="#" class="magnetic interactive">OS</a>
+            </div>
+        </div>
+
+        <!-- Center Model -->
+        <div class="pr-center">
+            <img src="https://plus.unsplash.com/premium_photo-1682023586963-70436dba774b?q=80&w=784&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                class="pr-model" alt="Fashion Model">
+            <div class="pr-page-dots">
+                <div class="pr-page-dot"></div>
+                <div class="pr-page-dot active"></div>
+                <div class="pr-page-dot"></div>
+                <div class="pr-page-dot"></div>
+                <div class="pr-page-dot"></div>
+                <div class="pr-page-dot"></div>
+            </div>
+        </div>
+
+        <!-- Right Specs and Bidding -->
+        <div class="pr-nav-right">
+            <a href="#" class="magnetic interactive"><svg viewBox="0 0 24 24">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                </svg> Search</a>
+            <a href="#" class="magnetic interactive">My Account</a>
+            <a href="#" class="magnetic interactive"><svg viewBox="0 0 24 24">
+                    <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                    <line x1="3" y1="6" x2="21" y2="6"></line>
+                    <path d="M16 10a4 4 0 0 1-8 0"></path>
+                </svg></a>
+        </div>
+
+        <div class="pr-right">
+            <div class="pr-info-top">
+                <div class="pr-desc-lines">
+                    <h5>Colour: <br> <span>PurpleHaze</span></h5>
+                    <br><br>
+                    <h5>ID: 324563</h5>
+                </div>
+                <div class="pr-price">$750</div>
+            </div>
+
+            <div class="pr-buttons">
+                <div class="pr-btn pr-btn-style interactive magnetic">PRODUCT</div>
+                <div class="pr-btn pr-btn-bid interactive magnetic">DRONE</div>
+            </div>
+
+            <div class="pr-thumb-row">
+                <img src="https://plus.unsplash.com/premium_photo-1677094310899-02303289cadf?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    class="pr-thumb interactive magnetic">
+                <img src="https://plus.unsplash.com/premium_photo-1677094310899-02303289cadf?q=80&w=1332&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                    class="pr-thumb interactive magnetic">
+                <div class="pr-next-text interactive magnetic">Next &rarr;</div>
+            </div>
+
+            <a href="#" class="pr-privacy interactive magnetic">Privacy</a>
+        </div>
+
+    </section>
+
     <!-- JavaScript Execution -->
     <script>
         // -------------------------
@@ -841,6 +1378,65 @@
               .to('#st-nav a, #st-socials a, .top-right-actions .tr-icon', { y: 0, opacity: 1, stagger: 0.1, duration: 0.8 }, "-=1.2")
               .to('#st-widget', { x: 0, opacity: 1, duration: 1, ease: "back.out(1)" }, "-=1");
 
+         // --- NEW: THE "SNAKE DECK" Z-AXIS SCROLL ANIMATION ---
+        
+        // 1. Initial setups
+        gsap.set('.snake-zoom-ui', { scale: 0.05, opacity: 0, z: -1000 });
+        gsap.set('.snake-card', { scale: 0, opacity: 0 }); // cards start completely hidden
+        gsap.set('.snake-bg-text', { scale: 0.8, opacity: 0 });
+
+        // 2. The Timeline
+        const snakeTl = gsap.timeline({
+            scrollTrigger: {
+                trigger: '#snake-scene',
+                start: 'top top',
+                end: 'bottom bottom', // Takes 400vh to scrub
+                scrub: 1.5, // 1.5 adds a slight smooth delay to the scroll
+                pin: '#snake-pin'
+            }
+        });
+
+        // Phase A: The camera flies INTO the UI (images coming towards screen on z-axis)
+        snakeTl.to('.snake-zoom-ui', { scale: 1, opacity: 1, z: 0, duration: 2, ease: 'power2.out' })
+               .to('.snake-zoom-ui', { scale: 10, opacity: 0, duration: 2, ease: 'power2.in' }) // Flies past camera
+               
+        // Phase B: The massive background text fades in
+               .to('.snake-bg-text', { opacity: 1, scale: 1, duration: 1 }, "-=0.5")
+
+        // Phase C: The stack of cards instantly appears in the center
+               .to('.snake-card', { scale: 1, opacity: 1, stagger: 0, duration: 0.5 })
+
+        // Phase D: The Snake Unspooling Effect!
+        // Calculate dynamic math for the wave "snake" curved layout.
+        const deckCards = gsap.utils.toArray('.snake-card');
+        
+        deckCards.forEach((card, i) => {
+            // We want cards to spread out from left to right.
+            const spreadWidth = window.innerWidth * 0.8; 
+            const startX = -spreadWidth / 2;
+            const xStep = spreadWidth / deckCards.length;
+            
+            const targetX = startX + (i * xStep) + (Math.random() * 20); // spread evenly horizontally
+            const targetY = Math.sin(i * 0.8) * 150; // The curve/wave factor for the snake shape (sinusoidal)
+            const targetRot = (i - (deckCards.length/2)) * 6; // Fanning rotation
+
+            // Staggering the unspool over exactly 3 seconds on the timeline
+            snakeTl.to(card, {
+                x: targetX,
+                y: targetY,
+                rotationZ: targetRot,
+                duration: 3,
+                ease: "power2.inOut",
+            }, 'snake-spread'); // The shared label ensures they all animate at the same phase
+        });
+
+        // Hover popup mechanic for cards when snake is idle
+        deckCards.forEach(card => {
+            card.addEventListener('mouseenter', () => gsap.to(card, { scale: 1.1, zIndex: 100, duration: 0.3 }));
+            card.addEventListener('mouseleave', () => gsap.to(card, { scale: 1, zIndex: 'auto', duration: 0.3 }));
+        });
+
+
         // -------------------------
         // 4. Zig-Zag Showcase Scroll Triggers
         // -------------------------
@@ -904,6 +1500,45 @@
                 scrub: 1,
                 invalidateOnRefresh: true,
             }
+        });
+
+         // --- NEW: Pressurd Purple Fashion Section Animation & Mouse Tracking ---
+        const pressurdSec = document.getElementById('pressurd-sec');
+        const prModel = document.querySelector('.pr-model');
+        const prWatermark = document.querySelector('.pr-watermark');
+
+        // Entry Animations
+        gsap.from('.pr-vert-text', { y: 200, opacity: 0, duration: 1.5, ease: 'power4.out', scrollTrigger: { trigger: pressurdSec, start: "top 60%" } });
+        gsap.from('.pr-model', { scale: 0.8, y: 100, opacity: 0, duration: 1.5, ease: 'back.out(1.5)', scrollTrigger: { trigger: pressurdSec, start: "top 50%" } });
+        gsap.from('.pr-right > *', { x: 50, opacity: 0, stagger: 0.1, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: pressurdSec, start: "top 40%" } });
+        gsap.from('.pr-watermark', { opacity: 0, scale: 0.8, duration: 2, ease: 'power2.out', scrollTrigger: { trigger: pressurdSec, start: "top 40%" } });
+
+        // Mouse Parallax Engine for Pressurd Section
+        pressurdSec.addEventListener('mousemove', (e) => {
+            let xAxis = (window.innerWidth / 2 - e.pageX) / 20;
+            let yAxis = (window.innerHeight / 2 - e.pageY) / 20;
+
+            // 3D Tilt the model
+            gsap.to(prModel, {
+                rotationY: xAxis,
+                rotationX: -yAxis, // flipped for natural tilt
+                duration: 0.5,
+                ease: "power1.out"
+            });
+
+            // Move the background watermark opposite to create massive depth
+            gsap.to(prWatermark, {
+                x: xAxis * -1.5,
+                y: yAxis * -1.5,
+                duration: 1.5,
+                ease: "power2.out"
+            });
+        });
+
+        // Reset tilt on leave
+        pressurdSec.addEventListener('mouseleave', () => {
+            gsap.to(prModel, { rotationY: 0, rotationX: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
+            gsap.to(prWatermark, { x: 0, y: 0, duration: 1, ease: "elastic.out(1, 0.3)" });
         });
 
     </script>
